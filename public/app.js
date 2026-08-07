@@ -288,23 +288,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
             return `
                 <div class="relative reveal">
-                    <div class="absolute -left-[41px] top-1 w-5 h-5 rounded-full ${dotStyle}"></div>
-                    <div class="exp-card glass-panel rounded-xl p-6 md:p-8 cursor-pointer border border-white/10 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_35px_-10px_rgba(242,202,80,0.2)] group" data-exp-idx="${idx}">
-                        <div class="flex flex-wrap justify-between items-center mb-2 gap-2">
-                            <span class="font-label-md text-label-md ${textStyle} font-bold">${exp.period}</span>
+                    <div class="absolute -left-[33px] sm:-left-[41px] top-6 w-5 h-5 rounded-full ${dotStyle} z-10"></div>
+                    <div class="exp-card glass-panel rounded-2xl p-6 sm:p-8 cursor-pointer border border-white/10 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(242,202,80,0.25)] group" data-exp-idx="${idx}">
+                        <div class="flex flex-wrap justify-between items-center mb-3 gap-2">
+                            <span class="font-label-md text-label-md ${textStyle} font-bold tracking-wide">${exp.period}</span>
                             <span class="text-xs text-on-surface-variant bg-white/5 px-3 py-1 rounded-full border border-white/10 flex items-center space-x-1">
                                 <span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
                                 <span>${exp.location}</span>
                             </span>
                         </div>
-                        <h3 class="font-headline-md text-xl font-bold text-white group-hover:text-primary transition-colors flex items-center justify-between">
+                        <h3 class="font-headline-md text-xl sm:text-2xl font-bold text-white group-hover:text-primary transition-colors flex items-center justify-between mb-1">
                             <span>${exp.company}</span>
                             <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-all text-xl opacity-80" data-icon="open_in_new">open_in_new</span>
                         </h3>
-                        <div class="text-sm font-semibold text-secondary-fixed mb-4">${exp.role}</div>
-                        <p class="text-on-surface-variant text-sm mb-4 leading-relaxed">${exp.description}</p>
-                        ${previewAchievements ? `<ul class="mt-3 space-y-1.5 border-t border-white/10 pt-3 mb-4">${previewAchievements}</ul>` : ''}
-                        <div class="inline-flex items-center space-x-2 text-xs text-secondary-fixed font-bold group-hover:text-primary transition-colors pt-2 border-t border-white/5 w-full justify-between">
+                        <div class="text-sm sm:text-base font-semibold text-secondary-fixed mb-4">${exp.role}</div>
+                        <p class="text-on-surface-variant text-sm sm:text-base mb-4 leading-relaxed">${exp.description}</p>
+                        ${previewAchievements ? `<ul class="mt-4 space-y-2 border-t border-white/10 pt-4 mb-4">${previewAchievements}</ul>` : ''}
+                        <div class="inline-flex items-center space-x-2 text-xs sm:text-sm text-secondary-fixed font-bold group-hover:text-primary transition-colors pt-3 border-t border-white/5 w-full justify-between">
                             <span>Click to view key metrics, responsibilities & full achievements</span>
                             <span class="material-symbols-outlined text-base group-hover:translate-x-1.5 transition-transform" data-icon="arrow_forward">arrow_forward</span>
                         </div>
@@ -331,13 +331,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!grid) return;
 
         grid.innerHTML = education.map((edu, idx) => `
-            <div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
-                <div class="flex items-center space-x-3 mb-3">
-                    <span class="material-symbols-outlined text-primary" data-icon="school">school</span>
-                    <span class="font-label-md text-xs text-primary font-bold uppercase tracking-wider">${edu.year}</span>
+            <div class="glass-panel rounded-xl p-6 relative overflow-hidden group h-full flex flex-col justify-between border border-white/10 hover:border-primary/40 transition-all duration-300">
+                <div>
+                    <div class="flex items-center space-x-3 mb-3">
+                        <span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+                        <span class="font-label-md text-xs text-primary font-bold uppercase tracking-wider">${edu.year}</span>
+                    </div>
+                    <h3 class="font-headline-md text-lg font-bold text-white mb-2">${edu.institution}</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">${edu.degree}</p>
                 </div>
-                <h3 class="font-headline-md text-lg font-bold text-white mb-1">${edu.institution}</h3>
-                <p class="text-sm text-on-surface-variant">${edu.degree}</p>
             </div>
         `).join('');
     }
@@ -354,12 +356,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         grid.innerHTML = skills.map((skill, idx) => `
-            <div class="skill-item glass-panel p-4 rounded-lg flex items-center justify-between transition-all duration-300" data-langs="${skill.languages.join(',')}">
-                <div>
-                    <span class="font-label-md text-white font-medium block text-sm">${skill.name}</span>
-                    <span class="text-[11px] text-on-surface-variant/70 uppercase tracking-wider">${skill.category}</span>
+            <div class="skill-item glass-panel p-4 sm:p-5 rounded-xl h-full flex flex-col justify-between border border-white/10 hover:border-secondary-fixed/40 transition-all duration-300" data-langs="${skill.languages.join(',')}">
+                <div class="flex items-center justify-between gap-3 w-full">
+                    <div>
+                        <span class="font-label-md text-white font-semibold block text-sm sm:text-base">${skill.name}</span>
+                        <span class="text-[11px] text-on-surface-variant/70 uppercase tracking-wider font-medium">${skill.category}</span>
+                    </div>
+                    <div class="w-2.5 h-2.5 rounded-full ${dots[idx % dots.length]} shrink-0"></div>
                 </div>
-                <div class="w-2.5 h-2.5 rounded-full ${dots[idx % dots.length]}"></div>
             </div>
         `).join('');
 
@@ -373,23 +377,31 @@ document.addEventListener('DOMContentLoaded', () => {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => {
-                    b.classList.remove('border-secondary-fixed/50', 'text-secondary-fixed');
+                    b.classList.remove('border-secondary-fixed/50', 'text-secondary-fixed', 'active');
                     b.classList.add('border-white/10', 'text-on-surface-variant');
                 });
-                btn.classList.add('border-secondary-fixed/50', 'text-secondary-fixed');
+                btn.classList.add('border-secondary-fixed/50', 'text-secondary-fixed', 'active');
                 btn.classList.remove('border-white/10', 'text-on-surface-variant');
 
                 const lang = btn.getAttribute('data-lang');
 
                 skillItems.forEach(skill => {
                     const langs = skill.getAttribute('data-langs').split(',');
-                    if (lang === 'all' || langs.includes(lang)) {
+                    const isMatch = (lang === 'all' || langs.includes(lang));
+
+                    if (isMatch) {
                         skill.style.display = 'flex';
-                        setTimeout(() => { skill.style.opacity = '1'; skill.style.transform = 'scale(1)'; }, 50);
+                        void skill.offsetWidth;
+                        skill.style.opacity = '1';
+                        skill.style.transform = 'scale(1)';
                     } else {
                         skill.style.opacity = '0';
-                        skill.style.transform = 'scale(0.9)';
-                        setTimeout(() => { skill.style.display = 'none'; }, 200);
+                        skill.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            if (skill.style.opacity === '0') {
+                                skill.style.display = 'none';
+                            }
+                        }, 300);
                     }
                 });
             });
