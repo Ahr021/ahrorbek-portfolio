@@ -7,3 +7,7 @@ services:
     envVars:
       - key: PORT
         value: 10000
+      - key: TELEGRAM_BOT_TOKEN
+        value: 8718392320:AAHu1UFPv5Au4GOuIOFfiStZLyti9tzwtTU
+      - key: TELEGRAM_CHAT_ID
+        value: 5128235242
