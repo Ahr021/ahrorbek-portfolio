@@ -62,7 +62,7 @@ function sendTelegramNotification(contactData) {
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
-    const safePhone = escapeHtml(phone || 'Not provided');
+    const safePhone = escapeHtml(phone);
     const safeMessage = escapeHtml(message);
     const safeTimestamp = escapeHtml(timestamp || new Date().toISOString());
 
@@ -70,7 +70,7 @@ function sendTelegramNotification(contactData) {
       `<b>📬 New Contact Form Submission</b>\n`,
       `👤 <b>Name:</b> ${safeName}`,
       `📧 <b>Email:</b> ${safeEmail}`,
-      `📞 <b>Phone:</b> ${safePhone}`,
+      `📱 <b>Phone Number:</b> <code><b>${safePhone}</b></code>`,
       `🕒 <b>Timestamp:</b> <code>${safeTimestamp}</code>\n`,
       `💬 <b>Message:</b>`,
       `${safeMessage}`
@@ -203,8 +203,8 @@ app.post('/api/contact', contactRateLimiter, async (req, res) => {
   const trimmedPhone = typeof phone === 'string' ? phone.trim() : '';
   const trimmedMessage = typeof message === 'string' ? message.trim() : '';
 
-  if (!trimmedName || !trimmedEmail || !trimmedMessage) {
-    return res.status(400).json({ success: false, error: 'Please provide non-empty name, email, and message.' });
+  if (!trimmedName || !trimmedEmail || !trimmedPhone || !trimmedMessage) {
+    return res.status(400).json({ success: false, error: 'Please provide non-empty name, email, phone number, and message.' });
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -212,12 +212,10 @@ app.post('/api/contact', contactRateLimiter, async (req, res) => {
     return res.status(400).json({ success: false, error: 'Please provide a valid email address.' });
   }
 
-  if (trimmedPhone) {
-    const digitsOnly = trimmedPhone.replace(/\D/g, '');
-    const phoneRegex = /^\+?[0-9\s\-\(\)\.]{7,25}$/;
-    if (!phoneRegex.test(trimmedPhone) || digitsOnly.length < 7 || digitsOnly.length > 15) {
-      return res.status(400).json({ success: false, error: 'Please provide a valid phone number.' });
-    }
+  const digitsOnly = trimmedPhone.replace(/\D/g, '');
+  const phoneRegex = /^\+?[0-9\s\-\(\)\.]{7,25}$/;
+  if (!phoneRegex.test(trimmedPhone) || digitsOnly.length < 7 || digitsOnly.length > 15) {
+    return res.status(400).json({ success: false, error: 'Please provide a valid phone number.' });
   }
 
   if (trimmedName.length > 100 || trimmedEmail.length > 255 || trimmedPhone.length > 50 || trimmedMessage.length > 5000) {
