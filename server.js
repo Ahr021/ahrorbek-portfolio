@@ -10,6 +10,31 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Simple in-memory rate limiter for contact endpoint
+const contactRateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const MAX_CONTACT_REQUESTS = 5;
+
+const contactRateLimiter = (req, res, next) => {
+  const clientIp = req.ip || req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+
+  let timestamps = contactRateLimitMap.get(clientIp) || [];
+  timestamps = timestamps.filter(ts => ts > windowStart);
+
+  if (timestamps.length >= MAX_CONTACT_REQUESTS) {
+    return res.status(429).json({
+      success: false,
+      error: 'Too many contact form submissions from this IP. Please try again later.'
+    });
+  }
+
+  timestamps.push(now);
+  contactRateLimitMap.set(clientIp, timestamps);
+  next();
+};
+
 // Load CV Data
 const getData = () => {
   const raw = fs.readFileSync(path.join(__dirname, 'data', 'cvData.json'), 'utf-8');
@@ -17,6 +42,23 @@ const getData = () => {
 };
 
 // API Endpoints
+app.get('/api/health', (req, res) => {
+  res.json({
+    success: true,
+    status: 'OK',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/api/cv/download', (req, res) => {
+  const cvPath = path.join(__dirname, 'Linkedin CV.pdf');
+  if (!fs.existsSync(cvPath)) {
+    return res.status(404).json({ success: false, error: 'CV file not found.' });
+  }
+  res.download(cvPath, 'Linkedin CV.pdf');
+});
+
 app.get('/api/all', (req, res) => {
   try {
     const data = getData();
@@ -71,14 +113,28 @@ app.get('/api/skills', (req, res) => {
   }
 });
 
-app.post('/api/contact', (req, res) => {
-  const { name, email, message } = req.body;
-  if (!name || !email || !message) {
-    return res.status(400).json({ success: false, error: 'Please provide name, email, and message.' });
+app.post('/api/contact', contactRateLimiter, (req, res) => {
+  const { name, email, message } = req.body || {};
+
+  const trimmedName = typeof name === 'string' ? name.trim() : '';
+  const trimmedEmail = typeof email === 'string' ? email.trim() : '';
+  const trimmedMessage = typeof message === 'string' ? message.trim() : '';
+
+  if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+    return res.status(400).json({ success: false, error: 'Please provide non-empty name, email, and message.' });
   }
 
-  console.log(`[Contact Form Ingestion] From: ${name} <${email}>`);
-  console.log(`[Message]: ${message}`);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(trimmedEmail)) {
+    return res.status(400).json({ success: false, error: 'Please provide a valid email address.' });
+  }
+
+  if (trimmedName.length > 100 || trimmedEmail.length > 255 || trimmedMessage.length > 5000) {
+    return res.status(400).json({ success: false, error: 'Input exceeds maximum allowed length.' });
+  }
+
+  console.log(`[Contact Form Ingestion] From: ${trimmedName} <${trimmedEmail}>`);
+  console.log(`[Message]: ${trimmedMessage}`);
 
   res.json({
     success: true,
