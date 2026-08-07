@@ -1,0 +1,94 @@
+{
+  "profile": {
+    "name": "Ahrorbek Tulkinov",
+    "title": "International Business & Relations Specialist",
+    "subTitle": "Global Sales & Cross-Border Expansion Manager",
+    "location": "Tashkent, Uzbekistan",
+    "email": "tulkinovakhrorbek@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/ahrorbektulkinov",
+    "summary": "At Milliard Club and Surprise Ice Cream, I lead international sales and export operations, bringing premium products and strategic partnerships to global markets. With a Bachelor's degree in Economics & Finance from Westminster International University in Tashkent, I specialize in market expansion, cross-border partnerships, financial oversight, and streamlined export operations."
+  },
+  "metrics": [
+    { "label": "Contract Value Secured", "value": 500, "unit": "K+", "prefix": "$" },
+    { "label": "Global Specialists Recruited", "value": 50, "unit": "+", "prefix": "" },
+    { "label": "International Markets & Countries", "value": 5, "unit": " Direct", "prefix": "" }
+  ],
+  "experience": [
+    {
+      "period": "April 2023 - Present",
+      "company": "Surprise ice cream",
+      "role": "International Sales Manager",
+      "location": "Andijan, Uzbekistan",
+      "description": "Leading global export operations, expanding brand footprint into new regional markets, and optimizing international trade channels.",
+      "responsibilities": [
+        "Formulating and executing international market expansion strategies across Central and East Asia.",
+        "Managing B2B distributor relationships, international trade negotiations, and export compliance.",
+        "Coordinating cross-border supply chain logistics and cold-chain distribution channels."
+      ],
+      "achievements": [
+        "Successfully launched brand presence and export channels across 3 new international territories.",
+        "Increased export sales volume by 35% through strategic B2B distribution agreements.",
+        "Optimized export supply chain workflows, reducing cross-border transit times by 15%."
+      ],
+      "metrics": [
+        { "label": "Export Growth", "value": "+35%" },
+        { "label": "New Export Territories", "value": "3 Countries" },
+        { "label": "Transit Efficiency", "value": "+15%" }
+      ]
+    },
+    {
+      "period": "January 2023 - December 2025",
+      "company": "MILLIARD CLUB",
+      "role": "International Relations Specialist",
+      "location": "Tashkent, Uzbekistan",
+      "description": "Spearheaded global HR branding, cross-border employer partnerships, and international relocation programs.",
+      "responsibilities": [
+        "Leading global talent acquisition strategies and cross-border recruitment across 5 countries.",
+        "Negotiating and securing B2B partnership contracts with foreign employers and recruitment agencies.",
+        "Designing and executing expat relocation, visa processing, and adaptation frameworks.",
+        "Organizing international job fairs and marketing campaigns to build global employer branding."
+      ],
+      "achievements": [
+        "Hired over 50 international specialists across 5 countries within one year, growing international headcount by 20%.",
+        "Negotiated & signed agreements with 3 foreign employers generating $500,000 in revenue.",
+        "Established partnerships with 5 foreign agencies, expanding recruitment pool by 30%.",
+        "Designed relocation & adaptation framework achieving an 80% 1-year retention rate for expat personnel.",
+        "Hosted 2 international job fairs connecting 100+ candidates with 15 employers.",
+        "Boosted foreign applications by 40% and secured 5 new enterprise clients through global marketing campaigns."
+      ],
+      "metrics": [
+        { "label": "Contract Value Secured", "value": "$500,000" },
+        { "label": "Specialists Recruited", "value": "50+" },
+        { "label": "1-Year Expat Retention Rate", "value": "80%" },
+        { "label": "Foreign Agencies Partnered", "value": "5" }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Westminster International University in Tashkent",
+      "degree": "Bachelor's Degree in Economics and Finance",
+      "year": "June 2023"
+    },
+    {
+      "institution": "Tashkent Financial Institute",
+      "degree": "Foundation Degree in Accounting and Finance",
+      "year": "September 2022 - June 2023"
+    }
+  ],
+  "skills": [
+    { "name": "National Sales Management", "category": "Core Competencies", "languages": ["en", "uz", "ru"] },
+    { "name": "International Distribution", "category": "Core Competencies", "languages": ["en", "uz", "ru"] },
+    { "name": "International Management", "category": "Core Competencies", "languages": ["en", "uz", "ru"] },
+    { "name": "Cross-Border Partnerships", "category": "Strategy", "languages": ["en", "ru"] },
+    { "name": "Market Expansion & Export", "category": "Strategy", "languages": ["en", "uz"] },
+    { "name": "Financial Oversight", "category": "Finance", "languages": ["en"] },
+    { "name": "Global Talent Acquisition", "category": "Operations", "languages": ["en", "ru"] },
+    { "name": "Relocation Program Design", "category": "Operations", "languages": ["en"] }
+  ],
+  "languages": [
+    { "name": "English", "level": "Full Professional Proficiency", "code": "en" },
+    { "name": "Uzbek", "level": "Native or Bilingual", "code": "uz" },
+    { "name": "Russian", "level": "Professional Working Proficiency", "code": "ru" }
+  ]
+}
