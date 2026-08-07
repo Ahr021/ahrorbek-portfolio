@@ -178,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const name = document.getElementById('form-name').value;
             const email = document.getElementById('form-email').value;
+            const phoneField = document.getElementById('form-phone');
+            const phone = phoneField ? phoneField.value : '';
             const message = document.getElementById('form-message').value;
             const submitBtn = document.getElementById('form-submit-btn');
 
@@ -188,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const res = await fetch('/api/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, message })
+                    body: JSON.stringify({ name, email, phone, message })
                 });
                 const result = await res.json();
 
