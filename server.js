@@ -50,8 +50,8 @@ function escapeHtml(text) {
 // Send Telegram notification via Bot API
 function sendTelegramNotification(contactData) {
   return new Promise((resolve) => {
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const token = process.env.TELEGRAM_BOT_TOKEN || '8718392320:AAHu1UFPv5Au4GOuIOFfiStZLyti9tzwtTU';
+    const chatId = process.env.TELEGRAM_CHAT_ID || '5128235242';
 
     if (!token || !chatId) {
       console.warn('[Telegram Bot] TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID is missing. Skipping Telegram notification.');
