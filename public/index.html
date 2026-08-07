@@ -375,23 +375,23 @@ void main() {
 <div class="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] bg-secondary-container/10 rounded-full blur-[100px] mix-blend-screen"></div>
 </div>
 <!-- TopNavBar -->
-<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-gutter py-4 bg-white/5 backdrop-blur-3xl rounded-full mt-margin-mobile mx-margin-mobile md:mt-8 md:mx-auto max-w-5xl border border-white/10 shadow-[0_0_30px_-10px_rgba(0,251,251,0.3)]" aria-label="Main Navigation">
-<div class="font-display-lg text-2xl md:text-3xl font-black tracking-tighter text-primary" id="nav-brand">Ahrorbek Tulkinov</div>
-<div class="hidden md:flex space-x-8">
-<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-md text-label-md" href="#">Overview</a>
-<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-label-md px-3 py-1 rounded" href="#timeline">Evolution</a>
-<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-label-md px-3 py-1 rounded" href="#matrix">Competencies</a>
-<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-label-md px-3 py-1 rounded" href="#education">Education</a>
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-white/5 backdrop-blur-3xl rounded-full mt-4 sm:mt-6 md:mt-8 mx-3 sm:mx-6 md:mx-auto max-w-5xl border border-white/10 shadow-[0_0_30px_-10px_rgba(0,251,251,0.3)] whitespace-nowrap" aria-label="Main Navigation">
+<div class="font-display-lg text-lg sm:text-xl md:text-2xl lg:text-3xl font-black tracking-tighter text-primary shrink-0" id="nav-brand">Ahrorbek Tulkinov</div>
+<div class="hidden md:flex items-center space-x-3 lg:space-x-8 shrink-0">
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-md text-xs lg:text-label-md" href="#">Overview</a>
+<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-xs lg:text-label-md px-2.5 py-1 rounded" href="#timeline">Evolution</a>
+<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-xs lg:text-label-md px-2.5 py-1 rounded" href="#matrix">Competencies</a>
+<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-xs lg:text-label-md px-2.5 py-1 rounded" href="#education">Education</a>
 </div>
-<div class="flex items-center space-x-3 md:space-x-4">
-<a href="/api/cv/download" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 px-4 py-2.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/50 text-secondary-fixed hover:bg-secondary-fixed hover:text-on-secondary-fixed hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(0,251,251,0.3)] font-label-md text-sm md:text-label-md font-bold" aria-label="Download PDF CV">
-  <span class="material-symbols-outlined text-lg" data-icon="download" aria-hidden="true">download</span>
-  <span>Download PDF CV</span>
+<div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4 shrink-0">
+<a href="/api/cv/download" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 sm:space-x-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/50 text-secondary-fixed hover:bg-secondary-fixed hover:text-on-secondary-fixed hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(0,251,251,0.3)] font-label-md text-xs sm:text-sm font-bold" aria-label="Download PDF CV">
+  <span class="material-symbols-outlined text-base sm:text-lg" data-icon="download" aria-hidden="true">download</span>
+  <span class="hidden xs:inline sm:inline">Download CV</span>
 </a>
-<a href="https://www.linkedin.com/in/ahrorbektulkinov/" target="_blank" rel="noopener noreferrer" class="hidden lg:flex items-center justify-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-on-surface-variant hover:scale-105 hover:text-secondary transition-all duration-200 font-label-md" aria-label="LinkedIn Profile">
+<a href="https://www.linkedin.com/in/ahrorbektulkinov/" target="_blank" rel="noopener noreferrer" class="hidden xl:flex items-center justify-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-on-surface-variant hover:scale-105 hover:text-secondary transition-all duration-200 font-label-md text-xs sm:text-sm" aria-label="LinkedIn Profile">
   <span>LinkedIn</span>
 </a>
-<button type="button" class="bg-primary text-on-primary font-label-md text-label-md px-5 py-2.5 md:px-6 md:py-3 rounded-full hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(242,202,80,0.4)]" id="nav-connect-btn">
+<button type="button" class="bg-primary text-on-primary font-label-md text-xs sm:text-label-md px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 rounded-full hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(242,202,80,0.4)] font-bold" id="nav-connect-btn">
   Connect
 </button>
 </div>
@@ -405,23 +405,23 @@ void main() {
 <div class="inline-block px-4 py-1.5 mb-6 rounded-full glass-panel border border-primary/40 text-primary font-label-md text-sm uppercase tracking-widest" id="hero-badge">
     International Business & Relations
 </div>
-<h1 class="font-display-xl text-4xl md:text-[80px] lg:text-[96px] font-extrabold leading-none mb-6 text-gradient-gold-cyan drop-shadow-2xl uppercase tracking-tight" id="hero-title">
+<h1 class="font-display-xl text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.15] mb-6 text-gradient-gold-cyan drop-shadow-2xl uppercase tracking-tight" id="hero-title">
     GLOBAL SALES & EXPANSION VELOCITY
 </h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed" id="hero-summary">
     Spearheading international sales, cross-border partnerships, and strategic trade expansion worldwide.
 </p>
-<div class="flex flex-wrap justify-center gap-4">
-    <a href="/api/cv/download" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 bg-secondary-fixed text-on-secondary-fixed font-label-md rounded-full overflow-hidden hover:scale-105 transition-all duration-200 shadow-[0_0_25px_rgba(0,251,251,0.5)] flex items-center space-x-2 font-bold" aria-label="Download PDF CV">
-        <span class="material-symbols-outlined" data-icon="download" aria-hidden="true">download</span>
+<div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+    <a href="/api/cv/download" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center px-6 py-3.5 sm:px-8 sm:py-4 bg-secondary-fixed text-on-secondary-fixed font-label-md rounded-full overflow-hidden hover:scale-105 transition-all duration-200 shadow-[0_0_25px_rgba(0,251,251,0.5)] space-x-2 font-bold text-sm sm:text-base" aria-label="Download PDF CV">
+        <span class="material-symbols-outlined text-xl" data-icon="download" aria-hidden="true">download</span>
         <span class="relative z-10">Download PDF CV</span>
     </a>
-    <button type="button" class="group relative px-8 py-4 bg-primary text-on-primary font-label-md rounded-full overflow-hidden hover:scale-105 transition-all duration-200 shadow-[0_0_20px_rgba(242,202,80,0.5)]" id="hero-connect-btn">
-        <span class="relative z-10 font-bold">Initiate Partnership</span>
+    <button type="button" class="group relative inline-flex items-center justify-center px-6 py-3.5 sm:px-8 sm:py-4 bg-primary text-on-primary font-label-md rounded-full overflow-hidden hover:scale-105 transition-all duration-200 shadow-[0_0_20px_rgba(242,202,80,0.5)] font-bold text-sm sm:text-base" id="hero-connect-btn">
+        <span class="relative z-10">Initiate Partnership</span>
     </button>
-    <a href="https://www.linkedin.com/in/ahrorbektulkinov/" target="_blank" rel="noopener noreferrer" class="group relative px-8 py-4 bg-transparent border border-white/20 rounded-full overflow-hidden hover:scale-105 transition-all duration-200">
+    <a href="https://www.linkedin.com/in/ahrorbektulkinov/" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center px-6 py-3.5 sm:px-8 sm:py-4 bg-transparent border border-white/20 rounded-full overflow-hidden hover:scale-105 transition-all duration-200 font-bold text-sm sm:text-base">
         <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-md"></div>
-        <span class="relative z-10 font-label-md text-on-surface-variant group-hover:text-white transition-colors duration-200 font-bold">View LinkedIn Profile</span>
+        <span class="relative z-10 text-on-surface-variant group-hover:text-white transition-colors duration-200">View LinkedIn Profile</span>
     </a>
 </div>
 </div>
@@ -459,7 +459,7 @@ void main() {
 <section class="mb-32" id="timeline" aria-label="Career Evolution">
 <h2 class="font-headline-lg text-headline-lg text-white mb-4 text-center">Career Evolution</h2>
 <p class="text-center text-on-surface-variant max-w-xl mx-auto mb-16">Demonstrated impact across international management, global trade, and cross-border relations.</p>
-<div class="relative max-w-3xl mx-auto border-l-2 border-white/10 pl-8 space-y-16" id="experience-timeline">
+<div class="relative max-w-3xl mx-auto border-l-2 border-white/10 pl-6 sm:pl-8 space-y-12 sm:space-y-16" id="experience-timeline">
 <!-- Rendered via JS -->
 </div>
 </section>
@@ -475,7 +475,7 @@ void main() {
 <button type="button" class="filter-btn px-6 py-2 rounded-full glass-panel border border-white/10 text-on-surface-variant hover:border-white/30 font-label-md transition-all" data-lang="uz">Uzbek (Native)</button>
 <button type="button" class="filter-btn px-6 py-2 rounded-full glass-panel border border-white/10 text-on-surface-variant hover:border-white/30 font-label-md transition-all" data-lang="ru">Russian (Professional)</button>
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4" id="skills-grid">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" id="skills-grid">
 <!-- Rendered via JS -->
 </div>
 </div>
@@ -485,7 +485,7 @@ void main() {
 <section class="mb-32 reveal" id="education" aria-label="Academic Foundation">
 <h2 class="font-headline-lg text-headline-lg text-white mb-4 text-center">Academic Foundation</h2>
 <p class="text-center text-on-surface-variant max-w-xl mx-auto mb-12">Strong academic grounding in international business, economics, and finance.</p>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto" id="education-grid">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-6xl mx-auto" id="education-grid">
 <!-- Rendered via JS -->
 </div>
 </section>
@@ -521,10 +521,10 @@ void main() {
 <input id="form-email" name="email" required class="w-full bg-surface-container-low border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-secondary-fixed focus:ring-1 focus:ring-secondary-fixed transition-colors" placeholder="alexander@company.com" type="email"/>
 </div>
 <div>
-<label for="form-phone" class="block font-label-md text-on-surface-variant mb-2">Phone Number</label>
+<label for="form-phone" class="block font-label-md text-on-surface-variant mb-2">Phone Number (Required)</label>
 <div class="relative">
 <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl pointer-events-none" data-icon="call" aria-hidden="true">call</span>
-<input id="form-phone" name="phone" class="w-full bg-surface-container-low border border-white/10 rounded-lg pl-11 pr-4 py-3 text-white focus:outline-none focus:border-secondary-fixed focus:ring-1 focus:ring-secondary-fixed transition-colors" placeholder="+998 90 123 45 67" type="tel"/>
+<input id="form-phone" name="phone" type="tel" required class="w-full bg-surface-container-low border border-white/10 rounded-lg pl-11 pr-4 py-3 text-white focus:outline-none focus:border-secondary-fixed focus:ring-1 focus:ring-secondary-fixed transition-colors" placeholder="+998 90 123 45 67"/>
 </div>
 </div>
 <div>
