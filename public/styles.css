@@ -1,0 +1,105 @@
+/* Portfolio 3D Motion & Interactive FX Stylesheet */
+
+:root {
+  --primary-gold: #f2ca50;
+  --secondary-cyan: #00fbfb;
+  --tertiary-blue: #97b0ff;
+  --card-bg-glass: rgba(255, 255, 255, 0.03);
+  --card-border-glass: rgba(255, 255, 255, 0.1);
+}
+
+/* 3D Perspective Card Container */
+.tilt-card-container {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* 3D Card Base Style */
+.tilt-card {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Internal 3D Depth Layer */
+.tilt-card-content {
+  transform: translateZ(25px);
+  transform-style: preserve-3d;
+}
+
+/* Dynamic Interactive Glare Overlay */
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(0, 251, 251, 0.05) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 20;
+}
+
+.tilt-card:hover .tilt-glare {
+  opacity: 1;
+}
+
+/* Button Light-Trail & Spotlight FX */
+.btn-light-trail {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-light-trail::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    140px circle at var(--trail-x, 50%) var(--trail-y, 50%),
+    rgba(0, 251, 251, 0.5) 0%,
+    rgba(242, 202, 80, 0.35) 45%,
+    transparent 75%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn-light-trail:hover::before {
+  opacity: 1;
+}
+
+.btn-light-trail > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Interactive Particle Overlay Canvas */
+#particle-trail-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Enhanced Focus & Hover Glow Utilities */
+.glass-panel-glow {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.glass-panel-glow:hover {
+  box-shadow: 0 15px 45px -5px rgba(0, 251, 251, 0.2), 0 0 25px rgba(242, 202, 80, 0.15);
+}
