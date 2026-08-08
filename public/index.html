@@ -376,23 +376,23 @@ void main() {
 <div class="absolute bottom-1/4 right-1/4 w-[40vw] h-[40vw] bg-secondary-container/10 rounded-full blur-[100px] mix-blend-screen"></div>
 </div>
 <!-- TopNavBar -->
-<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-white/5 backdrop-blur-3xl rounded-full mt-4 sm:mt-6 md:mt-8 mx-3 sm:mx-6 md:mx-auto max-w-5xl border border-white/10 shadow-[0_0_30px_-10px_rgba(0,251,251,0.3)] whitespace-nowrap" aria-label="Main Navigation">
-<div class="font-display-lg text-lg sm:text-xl md:text-2xl lg:text-3xl font-black tracking-tighter text-primary shrink-0" id="nav-brand">Ahrorbek Tulkinov</div>
-<div class="hidden md:flex items-center space-x-3 lg:space-x-8 shrink-0">
-<a class="text-secondary font-bold border-b-2 border-secondary pb-1 font-label-md text-xs lg:text-label-md" href="#">Overview</a>
-<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-xs lg:text-label-md px-2.5 py-1 rounded" href="#timeline">Evolution</a>
-<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-xs lg:text-label-md px-2.5 py-1 rounded" href="#matrix">Competencies</a>
-<a class="text-on-surface-variant hover:scale-105 hover:bg-white/10 transition-all duration-200 font-label-md text-xs lg:text-label-md px-2.5 py-1 rounded" href="#education">Education</a>
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl h-14 sm:h-16 px-4 sm:px-6 bg-black/70 backdrop-blur-2xl rounded-full border border-white/15 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8),0_0_30px_-5px_rgba(0,251,251,0.2)] flex items-center justify-between transition-all duration-300" aria-label="Main Navigation">
+<div class="font-display-lg text-base sm:text-lg font-black tracking-tight text-primary shrink-0 flex items-center space-x-2" id="nav-brand">
+  <span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed shadow-[0_0_10px_#00fbfb]"></span>
+  <span>Ahrorbek Tulkinov</span>
 </div>
-<div class="flex items-center space-x-2 sm:space-x-3 md:space-x-4 shrink-0">
-<a href="/api/cv/download" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 sm:space-x-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/50 text-secondary-fixed hover:bg-secondary-fixed hover:text-on-secondary-fixed hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(0,251,251,0.3)] font-label-md text-xs sm:text-sm font-bold" aria-label="Download PDF CV">
-  <span class="material-symbols-outlined text-base sm:text-lg" data-icon="download" aria-hidden="true">download</span>
-  <span class="hidden xs:inline sm:inline">Download CV</span>
+<div class="hidden md:flex items-center space-x-1 lg:space-x-2 shrink-0 bg-white/5 p-1 rounded-full border border-white/10">
+<a class="px-3.5 py-1.5 rounded-full font-label-md text-xs font-semibold text-white bg-white/15 shadow-[0_0_10px_rgba(255,255,255,0.1)] transition-all" href="#">Overview</a>
+<a class="px-3.5 py-1.5 rounded-full font-label-md text-xs font-semibold text-on-surface-variant hover:text-white hover:bg-white/10 transition-all" href="#timeline">Evolution</a>
+<a class="px-3.5 py-1.5 rounded-full font-label-md text-xs font-semibold text-on-surface-variant hover:text-white hover:bg-white/10 transition-all" href="#matrix">Competencies</a>
+<a class="px-3.5 py-1.5 rounded-full font-label-md text-xs font-semibold text-on-surface-variant hover:text-white hover:bg-white/10 transition-all" href="#education">Education</a>
+</div>
+<div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
+<a href="/api/cv/download" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 h-9 sm:h-10 px-3.5 sm:px-4 rounded-full bg-secondary-fixed/10 border border-secondary-fixed/50 text-secondary-fixed hover:bg-secondary-fixed hover:text-black hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(0,251,251,0.25)] font-label-md text-xs font-bold" aria-label="Download PDF CV">
+  <span class="material-symbols-outlined text-base" data-icon="download" aria-hidden="true">download</span>
+  <span>Download CV</span>
 </a>
-<a href="https://www.linkedin.com/in/ahrorbektulkinov/" target="_blank" rel="noopener noreferrer" class="hidden xl:flex items-center justify-center px-4 py-2 rounded-full bg-white/5 border border-white/10 text-on-surface-variant hover:scale-105 hover:text-secondary transition-all duration-200 font-label-md text-xs sm:text-sm" aria-label="LinkedIn Profile">
-  <span>LinkedIn</span>
-</a>
-<button type="button" class="bg-primary text-on-primary font-label-md text-xs sm:text-label-md px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 rounded-full hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(242,202,80,0.4)] font-bold" id="nav-connect-btn">
+<button type="button" class="h-9 sm:h-10 px-4 sm:px-5 rounded-full bg-primary text-black hover:bg-primary-container hover:scale-105 transition-all duration-200 shadow-[0_0_15px_rgba(242,202,80,0.4)] font-label-md text-xs font-bold" id="nav-connect-btn">
   Connect
 </button>
 </div>
