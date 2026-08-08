@@ -37,6 +37,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/styles.css"/>
 
 <!-- Schema.org Person JSON-LD Microdata -->
 <script type="application/ld+json">
@@ -408,9 +409,11 @@ void main() {
 <h1 class="font-display-xl text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.15] mb-6 text-gradient-gold-cyan drop-shadow-2xl uppercase tracking-tight" id="hero-title">
     GLOBAL SALES & EXPANSION VELOCITY
 </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed" id="hero-summary">
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-6 leading-relaxed" id="hero-summary">
     Spearheading international sales, cross-border partnerships, and strategic trade expansion worldwide.
 </p>
+<!-- 3D Kinetic Trade Network Globe Container -->
+<div id="globe-container" class="w-full h-[320px] sm:h-[400px] md:h-[450px] max-w-3xl mx-auto mb-8 relative flex items-center justify-center cursor-grab active:cursor-grabbing rounded-3xl overflow-hidden glass-panel border border-white/10 shadow-[0_0_50px_rgba(0,251,251,0.15)]"></div>
 <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
     <a href="/api/cv/download" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center justify-center px-6 py-3.5 sm:px-8 sm:py-4 bg-secondary-fixed text-on-secondary-fixed font-label-md rounded-full overflow-hidden hover:scale-105 transition-all duration-200 shadow-[0_0_25px_rgba(0,251,251,0.5)] space-x-2 font-bold text-sm sm:text-base" aria-label="Download PDF CV">
         <span class="material-symbols-outlined text-xl" data-icon="download" aria-hidden="true">download</span>
@@ -590,6 +593,7 @@ void main() {
 </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>
