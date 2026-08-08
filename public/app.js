@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Initialize Particle Engine & Canvas Overlay for Light Trails
+    const spawnParticle = initParticleCanvas();
+
     // 1. Fetch CV Data from Backend API
     fetchData();
+
+    // Initial 3D Tilt and Light Trails for static HTML elements
+    init3DTilt();
+    initButtonLightTrails(spawnParticle);
 
     // 2. Setup Reveal Observer
     const observerOptions = {
@@ -61,7 +68,141 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Modal Logic
+    // 5. 3D Card Tilt Effect Initializer (Metrics, Experience, Education)
+    function init3DTilt() {
+        const tiltCards = document.querySelectorAll('.tilt-card, .exp-card, #metrics-grid > div, #education-grid > div > div, .skill-item');
+        tiltCards.forEach(card => {
+            if (card.dataset.tiltInitialized) return;
+            card.dataset.tiltInitialized = "true";
+
+            if (!card.classList.contains('tilt-card')) {
+                card.classList.add('tilt-card');
+            }
+            if (!card.querySelector('.tilt-glare')) {
+                const glare = document.createElement('div');
+                glare.className = 'tilt-glare';
+                card.appendChild(glare);
+            }
+
+            let isHovered = false;
+
+            card.addEventListener('mouseenter', () => {
+                isHovered = true;
+                card.style.transition = 'transform 0.1s ease-out, border-color 0.3s ease, box-shadow 0.3s ease';
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                if (!isHovered) return;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (((centerY - y) / centerY) * 12).toFixed(2);
+                const rotateY = (((x - centerX) / centerX) * 12).toFixed(2);
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+                card.style.setProperty('--glare-x', `${((x / rect.width) * 100).toFixed(1)}%`);
+                card.style.setProperty('--glare-y', `${((y / rect.height) * 100).toFixed(1)}%`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                isHovered = false;
+                card.style.transition = 'transform 0.5s ease-out, border-color 0.3s ease, box-shadow 0.3s ease';
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        });
+    }
+
+    // 6. Interactive Light-Trail & Particle Effects Engine
+    function initParticleCanvas() {
+        let canvas = document.getElementById('particle-trail-canvas');
+        if (!canvas) {
+            canvas = document.createElement('canvas');
+            canvas.id = 'particle-trail-canvas';
+            document.body.appendChild(canvas);
+        }
+        const ctx = canvas.getContext('2d');
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const colors = ['#f2ca50', '#00fbfb', '#97b0ff', '#ffffff'];
+
+        function spawnParticle(x, y) {
+            particles.push({
+                x: x + (Math.random() - 0.5) * 6,
+                y: y + (Math.random() - 0.5) * 6,
+                vx: (Math.random() - 0.5) * 2.2,
+                vy: -Math.random() * 2.2 - 0.5,
+                size: Math.random() * 3.5 + 1.5,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                opacity: 1
+            });
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.opacity -= 0.025;
+                p.size *= 0.96;
+
+                if (p.opacity <= 0 || p.size <= 0.2) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.globalAlpha = p.opacity;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = p.color;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        render();
+        return spawnParticle;
+    }
+
+    function initButtonLightTrails(spawnParticleFn) {
+        const buttons = document.querySelectorAll('button, a.group, a[href], .filter-btn, [role="button"]');
+        buttons.forEach(btn => {
+            if (btn.dataset.trailInitialized) return;
+            btn.dataset.trailInitialized = "true";
+
+            btn.classList.add('btn-light-trail');
+
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                btn.style.setProperty('--trail-x', `${x}px`);
+                btn.style.setProperty('--trail-y', `${y}px`);
+
+                if (spawnParticleFn && Math.random() < 0.6) {
+                    spawnParticleFn(e.clientX, e.clientY);
+                }
+            });
+        });
+    }
+
+    // 7. Modal Logic
     const modal = document.getElementById('contact-modal');
     const openBtns = [document.getElementById('nav-connect-btn'), document.getElementById('hero-connect-btn')];
     const closeBtn = document.getElementById('close-modal');
@@ -88,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(closeBtn) closeBtn.addEventListener('click', closeModal);
     if(backdrop) backdrop.addEventListener('click', closeModal);
 
-    // 5b. Experience Modal Logic
+    // Experience Modal Logic
     const expModal = document.getElementById('experience-modal');
     const closeExpModalBtn = document.getElementById('close-exp-modal');
     const expBackdrop = document.getElementById('exp-modal-backdrop');
@@ -221,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(heroText) heroText.classList.add('reveal', 'active');
     }, 100);
 
-    // 6. Data Fetcher & Renderer
+    // 8. Data Fetcher & Renderer
     async function fetchData() {
         try {
             const res = await fetch('/api/all');
@@ -233,10 +374,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderEducation(data.education);
                 renderSkills(data.skills);
                 initReveals();
+                init3DTilt();
+                initButtonLightTrails(spawnParticle);
             }
         } catch (err) {
             console.error('Failed to load portfolio data:', err);
             initReveals();
+            init3DTilt();
+            initButtonLightTrails(spawnParticle);
         }
     }
 
@@ -260,14 +405,17 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.innerHTML = metrics.map((m, idx) => {
             const style = colorClasses[idx % colorClasses.length];
             return `
-                <div class="glass-panel rounded-xl p-8 text-center relative overflow-hidden group">
-                    <div class="absolute -top-10 -right-10 w-32 h-32 ${style.blurBg} rounded-full blur-2xl transition-all duration-500"></div>
-                    <div class="flex items-center justify-center font-display-lg text-display-lg ${style.text} mb-2">
-                        ${m.prefix ? `<span>${m.prefix}</span>` : ''}
-                        <span class="counter" data-target="${m.value}">0</span>
-                        <span class="font-headline-md">${m.unit}</span>
+                <div class="glass-panel tilt-card rounded-xl p-8 text-center relative overflow-hidden group glass-panel-glow border border-white/10 hover:border-primary/40">
+                    <div class="tilt-glare"></div>
+                    <div class="tilt-card-content">
+                        <div class="absolute -top-10 -right-10 w-32 h-32 ${style.blurBg} rounded-full blur-2xl transition-all duration-500"></div>
+                        <div class="flex items-center justify-center font-display-lg text-display-lg ${style.text} mb-2">
+                            ${m.prefix ? `<span>${m.prefix}</span>` : ''}
+                            <span class="counter" data-target="${m.value}">0</span>
+                            <span class="font-headline-md">${m.unit}</span>
+                        </div>
+                        <div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-2">${m.label}</div>
                     </div>
-                    <div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-2">${m.label}</div>
                 </div>
             `;
         }).join('');
@@ -287,26 +435,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const previewAchievements = exp.achievements ? exp.achievements.slice(0, 2).map(a => `<li class="mb-1 text-sm text-on-surface-variant/90 flex items-start space-x-2"><span class="text-primary font-bold">•</span><span>${a}</span></li>`).join('') : '';
 
             return `
-                <div class="relative reveal">
+                <div class="relative reveal tilt-card-container">
                     <div class="absolute -left-[33px] sm:-left-[41px] top-6 w-5 h-5 rounded-full ${dotStyle} z-10"></div>
-                    <div class="exp-card glass-panel rounded-2xl p-6 sm:p-8 cursor-pointer border border-white/10 hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_15px_40px_-10px_rgba(242,202,80,0.25)] group" data-exp-idx="${idx}">
-                        <div class="flex flex-wrap justify-between items-center mb-3 gap-2">
-                            <span class="font-label-md text-label-md ${textStyle} font-bold tracking-wide">${exp.period}</span>
-                            <span class="text-xs text-on-surface-variant bg-white/5 px-3 py-1 rounded-full border border-white/10 flex items-center space-x-1">
-                                <span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
-                                <span>${exp.location}</span>
-                            </span>
-                        </div>
-                        <h3 class="font-headline-md text-xl sm:text-2xl font-bold text-white group-hover:text-primary transition-colors flex items-center justify-between mb-1">
-                            <span>${exp.company}</span>
-                            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-all text-xl opacity-80" data-icon="open_in_new">open_in_new</span>
-                        </h3>
-                        <div class="text-sm sm:text-base font-semibold text-secondary-fixed mb-4">${exp.role}</div>
-                        <p class="text-on-surface-variant text-sm sm:text-base mb-4 leading-relaxed">${exp.description}</p>
-                        ${previewAchievements ? `<ul class="mt-4 space-y-2 border-t border-white/10 pt-4 mb-4">${previewAchievements}</ul>` : ''}
-                        <div class="inline-flex items-center space-x-2 text-xs sm:text-sm text-secondary-fixed font-bold group-hover:text-primary transition-colors pt-3 border-t border-white/5 w-full justify-between">
-                            <span>Click to view key metrics, responsibilities & full achievements</span>
-                            <span class="material-symbols-outlined text-base group-hover:translate-x-1.5 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+                    <div class="exp-card glass-panel tilt-card rounded-2xl p-6 sm:p-8 cursor-pointer border border-white/10 hover:border-primary/50 transition-all duration-300 transform group glass-panel-glow" data-exp-idx="${idx}">
+                        <div class="tilt-glare"></div>
+                        <div class="tilt-card-content">
+                            <div class="flex flex-wrap justify-between items-center mb-3 gap-2">
+                                <span class="font-label-md text-label-md ${textStyle} font-bold tracking-wide">${exp.period}</span>
+                                <span class="text-xs text-on-surface-variant bg-white/5 px-3 py-1 rounded-full border border-white/10 flex items-center space-x-1">
+                                    <span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+                                    <span>${exp.location}</span>
+                                </span>
+                            </div>
+                            <h3 class="font-headline-md text-xl sm:text-2xl font-bold text-white group-hover:text-primary transition-colors flex items-center justify-between mb-1">
+                                <span>${exp.company}</span>
+                                <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-all text-xl opacity-80" data-icon="open_in_new">open_in_new</span>
+                            </h3>
+                            <div class="text-sm sm:text-base font-semibold text-secondary-fixed mb-4">${exp.role}</div>
+                            <p class="text-on-surface-variant text-sm sm:text-base mb-4 leading-relaxed">${exp.description}</p>
+                            ${previewAchievements ? `<ul class="mt-4 space-y-2 border-t border-white/10 pt-4 mb-4">${previewAchievements}</ul>` : ''}
+                            <div class="inline-flex items-center space-x-2 text-xs sm:text-sm text-secondary-fixed font-bold group-hover:text-primary transition-colors pt-3 border-t border-white/5 w-full justify-between">
+                                <span>Click to view key metrics, responsibilities & full achievements</span>
+                                <span class="material-symbols-outlined text-base group-hover:translate-x-1.5 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -331,14 +482,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!grid) return;
 
         grid.innerHTML = education.map((edu, idx) => `
-            <div class="glass-panel rounded-xl p-6 relative overflow-hidden group h-full flex flex-col justify-between border border-white/10 hover:border-primary/40 transition-all duration-300">
-                <div>
-                    <div class="flex items-center space-x-3 mb-3">
-                        <span class="material-symbols-outlined text-primary" data-icon="school">school</span>
-                        <span class="font-label-md text-xs text-primary font-bold uppercase tracking-wider">${edu.year}</span>
+            <div class="tilt-card-container">
+                <div class="glass-panel tilt-card rounded-xl p-6 relative overflow-hidden group h-full flex flex-col justify-between border border-white/10 hover:border-primary/40 transition-all duration-300 glass-panel-glow">
+                    <div class="tilt-glare"></div>
+                    <div class="tilt-card-content flex flex-col justify-between h-full">
+                        <div>
+                            <div class="flex items-center space-x-3 mb-3">
+                                <span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+                                <span class="font-label-md text-xs text-primary font-bold uppercase tracking-wider">${edu.year}</span>
+                            </div>
+                            <h3 class="font-headline-md text-lg font-bold text-white mb-2">${edu.institution}</h3>
+                            <p class="text-sm text-on-surface-variant leading-relaxed">${edu.degree}</p>
+                        </div>
                     </div>
-                    <h3 class="font-headline-md text-lg font-bold text-white mb-2">${edu.institution}</h3>
-                    <p class="text-sm text-on-surface-variant leading-relaxed">${edu.degree}</p>
                 </div>
             </div>
         `).join('');
@@ -356,8 +512,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         grid.innerHTML = skills.map((skill, idx) => `
-            <div class="skill-item glass-panel p-4 sm:p-5 rounded-xl h-full flex flex-col justify-between border border-white/10 hover:border-secondary-fixed/40 transition-all duration-300" data-langs="${skill.languages.join(',')}">
-                <div class="flex items-center justify-between gap-3 w-full">
+            <div class="skill-item glass-panel tilt-card p-4 sm:p-5 rounded-xl h-full flex flex-col justify-between border border-white/10 hover:border-secondary-fixed/40 transition-all duration-300 glass-panel-glow" data-langs="${skill.languages.join(',')}">
+                <div class="tilt-glare"></div>
+                <div class="tilt-card-content flex items-center justify-between gap-3 w-full">
                     <div>
                         <span class="font-label-md text-white font-semibold block text-sm sm:text-base">${skill.name}</span>
                         <span class="text-[11px] text-on-surface-variant/70 uppercase tracking-wider font-medium">${skill.category}</span>
